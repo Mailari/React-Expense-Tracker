@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
 
 module.exports = {
@@ -16,7 +15,6 @@ module.exports = {
     new webpack.DefinePlugin({
       "%PUBLIC_URL%": JSON.stringify("/"), // Replace '/' with your public path
     }),
-    new Dotenv(),
   ],
   module: {
     rules: [
