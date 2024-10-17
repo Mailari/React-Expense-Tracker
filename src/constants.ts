@@ -2,7 +2,7 @@ const config = {
   production: {
     google_client_id:
       "453647735724-p1921fnk08p8f992e2vpa7fqv9v3jn5b.apps.googleusercontent.com",
-    backend_url: "https://expense-tracker-api.mailarigh.com/apii",
+    backend_url: "https://expense-tracker-api.mailarigh.com/api",
   },
   dev: {
     google_client_id:
