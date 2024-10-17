@@ -1,0 +1,17 @@
+.auth_container {
+  max-width: 300px;
+  height: 50%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+.login_choices {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.login_choice {
+  max-width: 40%;
+}

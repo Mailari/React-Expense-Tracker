@@ -1,13 +1,69 @@
+.londrina-sketch-regular {
+  font-family: "Londrina Sketch", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.cabin-sketch-regular {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cabin-sketch-bold {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Londrina Sketch", sans-serif;
+  font-weight: 700; /* Apply bold by default for headers */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: conic-gradient(
+      from 90deg at 0.5px 1px,
+      #0000 90deg,
+      rgba(0, 0, 0, 0.054) 0
+    )
+    0 0/30px 30px;
+  background-color: #e7cae2;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Example usage for h* and p tags */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 700; /* Apply bold by default for headers */
+  color: black;
+}
+
+p {
+  font-family: "Londrina Sketch", sans-serif;
+  font-weight: 400; /* Regular for paragraph */
+}
+
+.custom_box {
+  border: 1px solid rgba(0, 0, 0, 0.474);
+  padding: 20px;
+}
+
+.padded_box_x {
+  border: 1px solid rgba(0, 0, 0, 0.474);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.padded_box_y {
+  border: 1px solid rgba(0, 0, 0, 0.474);
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

@@ -1,6 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -12,19 +12,26 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public", "index.html"),
     }),
-    new webpack.DefinePlugin({
-      "%PUBLIC_URL%": JSON.stringify("/"), // Replace '/' with your public path
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "public",
+          to: ".",
+          globOptions: {
+            ignore: ["**/index.html"],
+          },
+        },
+      ],
     }),
   ],
   module: {
     rules: [
-      // `js` and `jsx` files are parsed using `babel`
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
-      // `ts` and `tsx` files are parsed using `ts-loader`
+
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
@@ -36,7 +43,7 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: ["@svgr/webpack", "file-loader"], // Handles SVG as React component and copies to output
+        use: ["@svgr/webpack", "file-loader"],
       },
     ],
   },
@@ -48,6 +55,6 @@ module.exports = {
       directory: path.join(__dirname, "build"),
     },
     port: 3000,
-    compress: true, // Enable gzip compression for serving static files
+    compress: true,
   },
 };

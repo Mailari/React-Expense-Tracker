@@ -1,0 +1,14 @@
+.text_input {
+  background-color: transparent;
+  margin: 2% 0%;
+  width: fit-content;
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 400;
+  width: 250px;
+}
+
+::placeholder {
+  font-family: "Cabin Sketch", sans-serif;
+  font-weight: 400;
+  color: black;
+}
