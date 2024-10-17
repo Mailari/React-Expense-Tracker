@@ -1,26 +1,42 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useEffect } from "react";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode"; // To decode Google JWT
+import { config } from "./constants";
 
-function App() {
+const App = () => {
+  const handleLoginSuccess = (credentialResponse) => {
+    const token = credentialResponse.credential;
+    const user = jwtDecode(token);
+
+    // Send this token to your backend for further processing
+    fetch("http://localhost:5000/api/auth/google", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("User authenticated:", data);
+      })
+      .catch((err) => console.error("Error:", err));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GoogleOAuthProvider clientId={config.google_client_id}>
+      <div>
+        <h1>Google Sign-In</h1>
+        <h2>{config.google_client_id}</h2>
+        <GoogleLogin
+          onSuccess={handleLoginSuccess}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
+      </div>
+    </GoogleOAuthProvider>
   );
-}
+};
 
 export default App;
