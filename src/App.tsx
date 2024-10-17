@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode"; // To decode Google JWT
-import { config } from "./constants";
+import { getConfig } from "./constants";
 
 const App = () => {
+  const { backend_url, google_client_id } = getConfig();
+  console.log({ backend_url, google_client_id });
+
   const handleLoginSuccess = (credentialResponse) => {
     const token = credentialResponse.credential;
     const user = jwtDecode(token);
 
     // Send this token to your backend for further processing
-    fetch("http://localhost:5000/api/auth/google", {
+    fetch(backend_url + "/auth/google", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,10 +27,10 @@ const App = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId={config.google_client_id}>
+    <GoogleOAuthProvider clientId={google_client_id}>
       <div>
         <h1>Google Sign-In</h1>
-        <h2>{config.google_client_id}</h2>
+        <h2>{google_client_id}</h2>
         <GoogleLogin
           onSuccess={handleLoginSuccess}
           onError={() => {
