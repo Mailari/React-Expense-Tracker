@@ -1,10 +1,11 @@
 import React from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode"; // To decode Google JWT
-import { getConfig } from "../../constants";
 import "./index.css";
-import TextInput from "../CustomComponents/TextInput";
 import { useNavigate } from "react-router-dom";
+import CustomButton from "../components/CustomComponents/Button";
+import TextInput from "../components/CustomComponents/TextInput";
+import { getConfig } from "../constants";
 
 function Login() {
   const { backend_url, google_client_id } = getConfig();
@@ -35,9 +36,12 @@ function Login() {
 
   return (
     <div className="auth_container custom_box">
-      <h3>Login with your account </h3>
+      <h3 style={{ textAlign: "left" }}>Login with your account </h3>
       <TextInput type="text" placeholder="Email" />
       <TextInput type="text" placeholder="Password" />
+      <br />
+      <CustomButton name={"Login"} />
+      <br />
       <div className="login_choices">
         <div className="login_choice">
           <GoogleOAuthProvider clientId={google_client_id}>
@@ -51,7 +55,7 @@ function Login() {
             </div>
           </GoogleOAuthProvider>
         </div>
-        <div className="login_choice padded_box_x" style={{ fontSize: "27px" }}>
+        <div className="login_choice padded_box_x" style={{ fontSize: "28px" }}>
           LinkedIn
         </div>
       </div>

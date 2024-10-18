@@ -1,7 +1,9 @@
-import { Navigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-// Mock authentication function
 export const isAuthenticated = () => {
-  // You can replace this with real authentication logic (JWT, session check, etc.)
-  return !!localStorage.getItem("authToken");
+  const token = localStorage.getItem("authToken");
+  if (!token) return false;
+  const payload = jwtDecode(token);
+  const now = Math.floor(new Date().getTime() / 1000);
+  return payload.exp > now;
 };

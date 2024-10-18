@@ -1,0 +1,15 @@
+.button-3d {
+  background-color: #0bde78; /* Bright green color */
+  border: 1px solid #333;
+  font-size: small;
+  padding: 10px;
+  border-radius: 0 0 6px 6px;
+  margin: 10px;
+  min-width: 150px;
+  border: 1px solid #333;
+  border-bottom: 6px solid #333;
+}
+
+.button-3d:active {
+  transform: translateY(4px);
+}

@@ -1,24 +1,50 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouteObject,
+  RouterProvider,
+} from "react-router-dom";
 import DashBoard from "./components/DashBoard";
-import Login from "./components/Login";
+import NotFoundPage from "./pages/NotFound.page";
+import SettingsPage from "./pages/settings.page";
+import Login from "./pages/Login.page";
+import MainLayout from "./components/Layouts/MainLayout";
 import { isAuthenticated } from "./utils/app.utils";
+import { Suspense } from "react";
+import Accounts from "./pages/Accounts.page";
 
-// Auth Guard component
-const ProtectedRoute = ({ element }) => {
-  return isAuthenticated() ? element : <Navigate to="/login" />;
+const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+  return isAuthenticated() ? children : <Navigate to="login" />;
 };
+
+const routes: RouteObject[] = [
+  {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <MainLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      { path: "", element: <DashBoard /> },
+      { path: "settings", element: <SettingsPage /> },
+      { path: "account", element: <Accounts /> },
+    ],
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+];
+
+const router = createBrowserRouter(routes, { basename: "/" });
 
 const App = () => {
   return (
-    <div>
-      <Routes>
-        {/**Public Routes */}
-        <Route path="/login" element={<Login />} />
-
-        {/** Protected Routes */}
-        <Route path="/" element={<ProtectedRoute element={<DashBoard />} />} />
-      </Routes>
-    </div>
+    <Suspense fallback={<>...isLoading</>}>
+      <RouterProvider router={router} />
+    </Suspense>
   );
 };
 
